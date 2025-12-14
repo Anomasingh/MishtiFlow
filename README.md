@@ -1,4 +1,4 @@
-# MishtiFlow 🍬
+# MishtiFlow 
 
 A modern sweet shop management system for browsing, purchasing, and managing Indian sweets inventory.
 
