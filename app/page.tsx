@@ -12,7 +12,7 @@ export default function HomePage() {
       <section className="relative overflow-hidden bg-gradient-to-br from-background via-secondary/30 to-accent/30">
         <div className="absolute inset-0">
           <Image
-            src="/placeholder.svg?height=800&width=1600"
+            src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=1600&h=800&fit=crop&q=80"
             alt="Indian Sweet Shop"
             fill
             className="object-cover opacity-10"

@@ -38,7 +38,7 @@ export function SweetCard({ sweet, showPurchase = true }: SweetCardProps) {
     router.refresh()
   }
 
-  const fallbackImage = `/placeholder.svg?height=400&width=400&query=${encodeURIComponent(`${sweet.name} indian sweet dessert close up food photography`)}`
+  const fallbackImage = `https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=400&h=400&fit=crop&q=80`
 
   return (
     <>
