@@ -176,7 +176,7 @@ export default function HomePage() {
       {/* CTA Section */}
       <section className="relative overflow-hidden py-20">
         <div className="absolute inset-0">
-          <Image src="/modern-sweet-shop-interior.jpg" alt="Shop Interior" fill className="object-cover opacity-5" />
+          <div className="absolute inset-0 bg-gradient-to-br from-orange-50 to-rose-50 opacity-30" />
         </div>
 
         <div className="container relative mx-auto px-4">
