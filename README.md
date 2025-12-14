@@ -68,78 +68,126 @@ npm test              # Run tests
 npm run test:watch    # Watch mode
 ```
 
-## 📁 Project Structure
+## Project Structure
 
-```
-app/
-├── api/auth/         # Login, register, logout
-├── api/sweets/       # CRUD + purchase/restock
-├── admin/            # Admin dashboard
-├── dashboard/        # Customer view
-└── [login/register]  # Auth pages
+\`\`\`
+├── app/
+│   ├── api/              # API routes
+│   │   ├── auth/         # Authentication endpoints
+│   │   └── sweets/       # Sweet management endpoints
+│   ├── admin/            # Admin panel page
+│   ├── dashboard/        # Main dashboard
+│   ├── login/            # Login page
+│   └── register/         # Registration page
+├── components/
+│   ├── ui/               # shadcn/ui components
+│   ├── navbar.tsx        # Navigation bar
+│   ├── sweet-card.tsx    # Sweet display card
+│   ├── search-filter-bar.tsx
+│   └── [admin components]
+├── lib/
+│   ├── auth.ts           # JWT utilities
+│   ├── db.ts             # Database utilities
+│   └── validators.ts     # Zod schemas
+├── __tests__/            # Test files
+├── scripts/              # Database scripts
+└── prisma/               # Prisma schema
+\`\`\`
 
-components/           # UI components & dialogs
-lib/                  # Auth, DB, validators
-__tests__/           # Jest test suites
-scripts/             # Database setup & seeding
-```
+## API Endpoints
 
-## 🔌 API Endpoints
-
-### Auth
-- `POST /api/auth/register` - Create account
-- `POST /api/auth/login` - Login
-- `POST /api/auth/logout` - Logout
-- `GET /api/auth/me` - Current user
+### Authentication
+- `POST /api/auth/register` - Register new user
+- `POST /api/auth/login` - Login user
+- `POST /api/auth/logout` - Logout user
+- `GET /api/auth/me` - Get current user
 
 ### Sweets
-- `GET /api/sweets` - List (filters: name, category, price)
-- `POST /api/sweets` - Create (admin)
-- `GET /api/sweets/:id` - Single sweet
-- `PUT /api/sweets/:id` - Update (admin)
-- `DELETE /api/sweets/:id` - Delete (admin)
-- `POST /api/sweets/:id/purchase` - Buy
-- `POST /api/sweets/:id/restock` - Restock (admin)
+- `GET /api/sweets` - List all sweets (with filters)
+- `POST /api/sweets` - Create sweet (ADMIN)
+- `GET /api/sweets/:id` - Get single sweet
+- `PUT /api/sweets/:id` - Update sweet (ADMIN)
+- `DELETE /api/sweets/:id` - Delete sweet (ADMIN)
+- `POST /api/sweets/:id/purchase` - Purchase sweet
+- `POST /api/sweets/:id/restock` - Restock sweet (ADMIN)
 
-## 🤖 AI Usage
+## My AI Usage
 
-Built with **GitHub Copilot** and **ChatGPT** assistance for:
-- Initial project structure & boilerplate
-- UI components and Tailwind styling
-- Test case generation
-- API route templates
+This project was built with assistance from v0 by Vercel, an AI-powered development assistant. Here's how AI contributed to the development process:
 
-**Human decisions:**
-- Database choice (MongoDB over PostgreSQL)
-- Security implementation (JWT, bcrypt)
-- Business logic (atomic stock updates)
-- Architecture & error handling
-- Code review & refactoring
+### What AI Helped With
 
-AI accelerated development but didn't replace engineering judgment for critical decisions around security, architecture, and business requirements.
+1. **Boilerplate Code Generation**: AI helped generate initial project structure, component scaffolding, and configuration files, significantly reducing setup time.
 
-## 🚢 Deployment
+2. **UI Design**: AI generated design inspiration and helped implement a cohesive color palette inspired by Indian sweets (saffron, rose, pistachio, cardamom) with proper Tailwind CSS theming.
 
-**Vercel** (Recommended):
-1. Connect GitHub repo
-2. Add environment variables
-3. Deploy
+3. **Test Writing**: AI assisted in writing comprehensive test cases following TDD principles, covering authentication, validation, CRUD operations, and edge cases.
 
-**Alternative:** Railway, Render, or any Node.js host
+4. **API Route Implementation**: AI helped structure API routes with proper error handling, validation, and response formatting.
 
-## ✨ Best Practices
+5. **Type Safety**: AI helped ensure TypeScript types were properly defined throughout the application.
 
-- Test-Driven Development (TDD)
-- Type safety with TypeScript
-- Atomic database operations
-- Input validation (Zod)
-- Secure authentication
-- Clean code principles
+### Human Oversight and Refinement
 
-## 📄 License
+While AI provided a strong foundation, human engineering judgment was crucial for:
+
+- **Architecture Decisions**: Choosing between Prisma ORM vs raw SQL queries (opted for raw SQL for better control)
+- **Security Implementation**: Ensuring proper JWT handling, HTTP-only cookies, and bcrypt configuration
+- **Business Logic**: Atomic stock updates, purchase validation, and authorization rules
+- **Database Design**: Schema structure, relationships, and query optimization
+- **Error Handling**: Context-specific error messages and proper HTTP status codes
+- **Testing Strategy**: Deciding what to test and ensuring meaningful coverage
+
+### Productivity Impact
+
+AI significantly improved productivity by:
+- Reducing time spent on repetitive code patterns
+- Providing instant syntax and API reference
+- Generating test cases that might have been overlooked
+- Suggesting accessibility improvements and best practices
+
+However, AI did not replace the need for:
+- Understanding business requirements
+- Making architectural trade-offs
+- Debugging complex issues
+- Code review and refactoring
+- Security auditing
+
+The combination of AI assistance and human expertise resulted in a production-ready application built faster without compromising quality or security.
+
+## Deployment
+
+### Backend Deployment (Railway/Render)
+
+1. Create a PostgreSQL database on your hosting platform
+2. Set environment variables:
+   - `DATABASE_URL`
+   - `JWT_SECRET`
+3. Deploy the Next.js application
+4. Run database scripts after deployment
+
+### Frontend Deployment (Vercel)
+
+1. Connect your GitHub repository to Vercel
+2. Set environment variables in Vercel dashboard
+3. Deploy automatically on push to main branch
+
+## Best Practices Followed
+
+- **Test-Driven Development**: Comprehensive test coverage for critical paths
+- **SOLID Principles**: Separation of concerns, single responsibility
+- **Security First**: Password hashing, JWT tokens, authorization checks
+- **Type Safety**: Full TypeScript coverage
+- **Clean Code**: Meaningful names, proper comments, modular structure
+- **Atomic Operations**: Database transactions for inventory updates
+- **Error Handling**: Centralized error handling with clear messages
+- **Validation**: Input validation at API and UI levels
+- **Responsive Design**: Mobile-first approach with Tailwind CSS
+
+## License
 
 MIT
 
----
+## Contact
 
-**Questions?** Open an issue on [GitHub](https://github.com/Anomasingh/MishtiFlow/issues)
+For questions or support, please open an issue on GitHub.
