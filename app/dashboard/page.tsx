@@ -73,7 +73,7 @@ export default async function DashboardPage({
       <div className="container mx-auto px-4 py-12">
         <div className="relative mb-12 overflow-hidden rounded-3xl">
           <div className="relative h-48 md:h-64">
-            <Image src="/variety-of-indian-sweets-display.jpg" alt="Our Sweet Collection" fill className="object-cover" priority />
+            <Image src="https://images.unsplash.com/photo-1606491956391-314b33f76630?w=1600&h=600&fit=crop&q=80" alt="Our Sweet Collection" fill className="object-cover" priority />
             <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/50 to-transparent" />
             <div className="absolute inset-0 flex items-center">
               <div className="container mx-auto px-8">

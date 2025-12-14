@@ -51,7 +51,7 @@ export default function LoginPage() {
   return (
     <div className="flex min-h-screen">
       <div className="hidden lg:block lg:w-1/2 relative">
-        <Image src="/indian-sweet-shop-display-with-mithai.jpg" alt="Sweet Shop Display" fill className="object-cover" priority />
+        <Image src="https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=1200&h=1600&fit=crop&q=80" alt="Sweet Shop Display" fill className="object-cover" priority />
         <div className="absolute inset-0 bg-gradient-to-r from-transparent to-background/20" />
       </div>
 
