@@ -124,16 +124,19 @@ export default function LoginPage() {
                   )}
                 </Button>
 
-                <div className="flex items-center justify-between text-sm">
+                <Link href="/admin-login" className="w-full">
+                  <Button type="button" variant="outline" className="w-full h-11 border-orange-500 text-orange-600 hover:bg-orange-50 hover:text-orange-700">
+                    Admin Login
+                  </Button>
+                </Link>
+
+                <div className="text-center text-sm">
                   <p className="text-muted-foreground">
                     New here?{" "}
                     <Link href="/register" className="font-semibold text-primary hover:underline">
                       Create account
                     </Link>
                   </p>
-                  <Link href="/admin-login" className="text-orange-600 hover:underline font-medium">
-                    Admin login →
-                  </Link>
                 </div>
               </CardFooter>
             </form>

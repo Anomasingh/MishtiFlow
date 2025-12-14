@@ -87,7 +87,7 @@ export default function HomePage() {
             <div className="relative hidden lg:block">
               <div className="relative aspect-square w-full rounded-3xl overflow-hidden shadow-2xl">
                 <Image
-                  src="https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=800&h=800&fit=crop&q=80"
+                  src="/indian-sweets-platter.png"
                   alt="Assorted Indian Sweets"
                   fill
                   className="object-cover"
