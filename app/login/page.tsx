@@ -51,7 +51,7 @@ export default function LoginPage() {
   return (
     <div className="flex min-h-screen">
       <div className="hidden lg:block lg:w-1/2 relative">
-        <Image src="/candy-dessert-row-generated-by-ai.jpg" alt="Sweet Shop Display" fill className="object-cover" priority />
+        <Image src="/candy-dessert-row-generated-by-ai.jpg" alt="Sweet Shop Display" fill className="object-cover" priority loading="eager" quality={90} />
         <div className="absolute inset-0 bg-gradient-to-r from-transparent to-background/20" />
       </div>
 

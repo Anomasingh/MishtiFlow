@@ -92,6 +92,8 @@ export default function HomePage() {
                   fill
                   className="object-cover"
                   priority
+                  loading="eager"
+                  quality={90}
                 />
               </div>
               {/* Decorative elements */}
