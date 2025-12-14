@@ -13,7 +13,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: validation.error.errors[0].message }, { status: 400 })
     }
 
-    const { email, password, name } = validation.data
+    const { email, password, name, role } = validation.data
 
     const db = await getDb()
     const usersCollection = db.collection("users")
@@ -27,12 +27,12 @@ export async function POST(request: Request) {
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10)
 
-    // Create user
+    // Create user with specified role
     const insertResult = await usersCollection.insertOne({
       email,
       password: hashedPassword,
       name,
-      role: "USER",
+      role: role || "USER",
       createdAt: new Date(),
       updatedAt: new Date(),
     })
@@ -41,7 +41,7 @@ export async function POST(request: Request) {
       id: insertResult.insertedId.toString(),
       email,
       name,
-      role: "USER",
+      role: role || "USER",
     }
 
     // Generate JWT token

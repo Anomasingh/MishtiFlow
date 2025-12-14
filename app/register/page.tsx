@@ -11,11 +11,13 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Sparkles, Loader2 } from "lucide-react"
 import Image from "next/image"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 
 export default function RegisterPage() {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
+  const [role, setRole] = useState("USER")
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -38,7 +40,7 @@ export default function RegisterPage() {
       const response = await fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify({ name, email, password, role }),
       })
 
       const data = await response.json()
@@ -47,7 +49,7 @@ export default function RegisterPage() {
         throw new Error(data.error || "Registration failed")
       }
 
-      router.push("/dashboard")
+      router.push(role === "ADMIN" ? "/admin" : "/dashboard")
       router.refresh()
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong")
@@ -141,6 +143,20 @@ export default function RegisterPage() {
                     disabled={isLoading}
                     className="h-11"
                   />
+                </div>
+
+                <div className="space-y-3">
+                  <Label>Account Type</Label>
+                  <RadioGroup value={role} onValueChange={setRole} className="flex gap-4">
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="USER" id="user" />
+                      <Label htmlFor="user" className="cursor-pointer font-normal">User</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="ADMIN" id="admin" />
+                      <Label htmlFor="admin" className="cursor-pointer font-normal">Admin</Label>
+                    </div>
+                  </RadioGroup>
                 </div>
               </CardContent>
               <CardFooter className="flex flex-col gap-4">

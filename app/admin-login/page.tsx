@@ -113,6 +113,14 @@ export default function AdminLoginPage() {
                     className="h-11"
                   />
                 </div>
+
+                <div className="pt-2 rounded-lg bg-orange-50 p-3 border border-orange-200">
+                  <p className="text-sm text-orange-900 font-medium mb-1">Testing admin access?</p>
+                  <p className="text-xs text-orange-700">
+                    Use: <span className="font-mono">admin@mishtiflow.com</span> /{" "}
+                    <span className="font-mono">admin123</span>
+                  </p>
+                </div>
               </CardContent>
 
               <CardFooter className="flex flex-col space-y-4">
