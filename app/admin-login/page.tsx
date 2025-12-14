@@ -9,10 +9,10 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Sparkles, Loader2 } from "lucide-react"
+import { Shield, Loader2, Sparkles } from "lucide-react"
 import Image from "next/image"
 
-export default function LoginPage() {
+export default function AdminLoginPage() {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
@@ -39,7 +39,14 @@ export default function LoginPage() {
         throw new Error(data.error || "Login failed")
       }
 
-      router.push("/dashboard")
+      // Check if user is admin
+      if (data.user.role !== "ADMIN") {
+        setError("Access denied. Admin credentials required.")
+        await fetch("/api/auth/logout", { method: "POST" })
+        return
+      }
+
+      router.push("/admin")
       router.refresh()
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong")
@@ -55,7 +62,7 @@ export default function LoginPage() {
         <div className="absolute inset-0 bg-gradient-to-r from-transparent to-background/20" />
       </div>
 
-      <div className="flex w-full lg:w-1/2 items-center justify-center bg-gradient-to-br from-background via-secondary/20 to-accent/20 p-4">
+      <div className="flex w-full lg:w-1/2 items-center justify-center bg-gradient-to-br from-background via-red-50/50 to-orange-50/50 p-4">
         <div className="w-full max-w-md">
           {/* Logo */}
           <div className="mb-8 flex justify-center">
@@ -65,10 +72,13 @@ export default function LoginPage() {
             </Link>
           </div>
 
-          <Card className="border-2 shadow-xl">
+          <Card className="border-2 shadow-xl border-orange-200">
             <CardHeader className="space-y-1">
-              <CardTitle className="font-serif text-2xl">Hey, welcome back!</CardTitle>
-              <CardDescription>Sign in to browse and purchase sweets</CardDescription>
+              <div className="flex items-center gap-2">
+                <Shield className="h-6 w-6 text-orange-600" />
+                <CardTitle className="font-serif text-2xl">Admin Access</CardTitle>
+              </div>
+              <CardDescription>Sign in with admin credentials to manage inventory</CardDescription>
             </CardHeader>
             <form onSubmit={handleSubmit}>
               <CardContent className="space-y-4">
@@ -79,12 +89,12 @@ export default function LoginPage() {
                 )}
 
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="email">Admin Email</Label>
                   <Input
                     id="email"
                     name="email"
                     type="email"
-                    placeholder="your.email@example.com"
+                    placeholder="admin@mishtiflow.com"
                     required
                     disabled={isLoading}
                     className="h-11"
@@ -92,7 +102,7 @@ export default function LoginPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="password">Password</Label>
+                  <Label htmlFor="password">Admin Password</Label>
                   <Input
                     id="password"
                     name="password"
@@ -103,16 +113,9 @@ export default function LoginPage() {
                     className="h-11"
                   />
                 </div>
-
-                <div className="pt-2 rounded-lg bg-muted/50 p-3">
-                  <p className="text-sm text-muted-foreground font-medium mb-1">Just trying it out?</p>
-                  <p className="text-xs text-muted-foreground">
-                    Use: <span className="font-mono">user@mishtiflow.com</span> /{" "}
-                    <span className="font-mono">user123</span>
-                  </p>
-                </div>
               </CardContent>
-              <CardFooter className="flex flex-col gap-4">
+
+              <CardFooter className="flex flex-col space-y-4">
                 <Button type="submit" className="w-full h-11" disabled={isLoading}>
                   {isLoading ? (
                     <>
@@ -120,24 +123,26 @@ export default function LoginPage() {
                       Signing in...
                     </>
                   ) : (
-                    "Sign in"
+                    <>
+                      <Shield className="mr-2 h-4 w-4" />
+                      Sign in as Admin
+                    </>
                   )}
                 </Button>
 
-                <div className="flex items-center justify-between text-sm">
-                  <p className="text-muted-foreground">
-                    New here?{" "}
-                    <Link href="/register" className="font-semibold text-primary hover:underline">
-                      Create account
-                    </Link>
-                  </p>
-                  <Link href="/admin-login" className="text-orange-600 hover:underline font-medium">
-                    Admin login →
+                <div className="text-center text-sm text-muted-foreground">
+                  Not an admin?{" "}
+                  <Link href="/login" className="text-primary underline-offset-4 hover:underline">
+                    User login
                   </Link>
                 </div>
               </CardFooter>
             </form>
           </Card>
+
+          <p className="mt-4 text-center text-xs text-muted-foreground">
+            Admin access is restricted. Unauthorized access attempts will be logged.
+          </p>
         </div>
       </div>
     </div>

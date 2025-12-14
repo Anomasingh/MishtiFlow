@@ -66,10 +66,15 @@ export function Navbar({ user }: NavbarProps) {
           ) : (
             <>
               <Link href="/login">
-                <Button variant="ghost">Sign In</Button>
+                <Button variant="ghost">User Login</Button>
+              </Link>
+              <Link href="/admin-login">
+                <Button variant="outline" className="border-orange-200 text-orange-600 hover:bg-orange-50">
+                  Admin
+                </Button>
               </Link>
               <Link href="/register">
-                <Button>Get Started</Button>
+                <Button>Sign Up</Button>
               </Link>
             </>
           )}
